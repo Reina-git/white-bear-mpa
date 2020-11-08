@@ -1,14 +1,10 @@
 import React from "react";
 import thumbsUpIcon from "../../icons/thumbs-up.svg";
-import Header from "../ui/Header";
-import Navigation from "../ui/Navigation";
 import AppTemplate from "../ui/AppTemplate";
 
 export default function ReviewAnswer() {
    return (
       <AppTemplate>
-         <Header />
-         <Navigation />
          <div className="mb-5"></div>
          <div className="mb-5">
             <div className="card">

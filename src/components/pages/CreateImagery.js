@@ -1,6 +1,8 @@
 import React from "react";
 import saveLogo from "../../icons/save.svg";
 import AppTemplate from "../ui/AppTemplate";
+import { Link } from "react-router-dom";
+
 export default function CreateImagery() {
    return (
       <div>
@@ -51,9 +53,9 @@ export default function CreateImagery() {
             </p>
             <div className="clearfix"></div>
 
-            <button className="btn btn-link" id="back-card">
+            <Link to="create-answer" className="btn btn-link" id="back-card">
                Back to answer
-            </button>
+            </Link>
 
             <button
                className="btn btn-primary btn-lg ml-4 float-right"

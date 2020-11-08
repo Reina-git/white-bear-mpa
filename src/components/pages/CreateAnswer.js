@@ -1,6 +1,6 @@
 import React from "react";
-
 import AppTemplate from "../ui/AppTemplate";
+import { Link } from "react-router-dom";
 
 export default function CreateAnswer() {
    return (
@@ -12,7 +12,7 @@ export default function CreateAnswer() {
                <textarea
                   rows="11"
                   id="create-answer-input"
-                  autofocus
+                  autoFocus={true}
                ></textarea>
             </div>
          </div>
@@ -22,14 +22,14 @@ export default function CreateAnswer() {
          </p>
          <div className="clearfix"></div>
 
-         <button
-            href="/create-imagery.html"
+         <Link
+            to="/create-imagery"
             className="btn btn-outline-primary btn-lg ml-4 float-right"
-            disabled="true"
+            disabled={true}
             id="save-card"
          >
             Next
-         </button>
+         </Link>
       </AppTemplate>
    );
 }

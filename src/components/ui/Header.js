@@ -8,7 +8,7 @@ export default function Header() {
          {" "}
          <img src={appLogo} width="32px" alt="white bear logo" />
          <h3 className="d-inline text-brand text-dark ml-1">White Bear</h3>
-         <Link to="/landing" className="btn btn-link float-right">
+         <Link to="/" className="btn btn-link float-right">
             Log out
          </Link>
          <div className="clearfix"></div>
