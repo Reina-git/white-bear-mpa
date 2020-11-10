@@ -9,7 +9,7 @@ export default function Edit() {
          <p className="text-center lead text-muted my-2">Edit card</p>
          <div id="edit-cards-total">
             <div className="card">
-               <div className="card-body bg-secondary lead">
+               <div className="card-body bg-primary lead">
                   <textarea
                      rows="8"
                      id="edit-imagery-input"
@@ -31,7 +31,7 @@ export default function Edit() {
             className="float-right mt-2 mb-5 text-muted d-flex"
             id="Top-Bottom-Counter"
          >
-            <p className>
+            <p>
                Top: <span id="edit-imagery-char-count">0</span>/240 Bottom:{" "}
                <span id="edit-answer-char-count">0</span>/240
             </p>
