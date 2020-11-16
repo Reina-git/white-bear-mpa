@@ -105,3 +105,8 @@ textarea {
 .someclass {
    background-size: cover;
 }
+
+.disabled {
+   pointer-events: fill !important;
+   cursor: not-allowed;
+}
