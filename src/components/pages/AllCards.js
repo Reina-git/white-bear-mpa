@@ -1,7 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import EditIcon from "../../icons/edit.svg";
+import memoryCards from "../../mock-data/memory-cards";
 import AppTemplate from "../ui/AppTemplate";
+import MemoryCard from "../ui/MemoryCard";
 
 export default function AllCards() {
    return (
@@ -43,83 +43,15 @@ export default function AllCards() {
                   </select>
                </div>
             </div>
-
-            <div className="d-flex align-items-start mb-5">
-               <div className="app-card">
-                  <div className="card">
-                     <div className="card-body bg-primary 16pt">
-                        Far far away, behind the word mountains, far from the
-                        countries Vokalia and Consonantia, there live the blind
-                        texts. Separated they live in Bookmarksgrove right at
-                        the coast of the S emantics, a large language ocean. A
-                        small river named Duden flows by their place and
-                        supplies it with the necessary re
-                     </div>
-                  </div>
-                  <div className="card">
-                     <div className="card-body bg-secondary 16pt">
-                        Far far away, behind the word mountains, far from the
-                        countries Vokalia and Consonantia, there live the blind
-                        texts. Separated they live in Bookmarksgrove right at
-                        the coast of the Semantics, a large language ocean. A
-                        small river named Duden flows by their place and
-                        supplies it with the necessary regelialia
-                     </div>
-                  </div>
-               </div>
-
-               <Link to="/edit" className="btn btn-link ml-4 d-flex mt-n2">
-                  <img
-                     src={EditIcon}
-                     className="d-inline"
-                     style={{
-                        marginBottom: "2px",
-                        marginRight: "8px",
-                     }}
-                     width="20px"
-                     alt=""
+            {memoryCards.map((memoryCard) => {
+               return (
+                  <MemoryCard
+                     answer={memoryCard.answer}
+                     imagery={memoryCard.imagery}
+                     key={memoryCard.id}
                   />
-                  Edit
-               </Link>
-            </div>
-            <div className="d-flex align-items-start">
-               <div className="app-card">
-                  <div className="card">
-                     <div className="card-body bg-primary 16pt">
-                        Far far away, behind the word mountains, far from the
-                        countries Vokalia and Consonantia, there live the blind
-                        texts. Separated they live in Bookmarksgrove right at
-                        the coast of the S emantics, a large language ocean. A
-                        small river named Duden flows by their place and
-                        supplies it with the necessary re
-                     </div>
-                  </div>
-                  <div className="card">
-                     <div className="card-body bg-secondary 16pt">
-                        Far far away, behind the word mountains, far from the
-                        countries Vokalia and Consonantia, there live the blind
-                        texts. Separated they live in Bookmarksgrove right at
-                        the coast of the Semantics, a large language ocean. A
-                        small river named Duden flows by their place and
-                        supplies it with the necessary regelialia
-                     </div>
-                  </div>
-               </div>
-
-               <Link to="/edit" className="btn btn-link ml-4 d-flex mt-n2">
-                  <img
-                     src={EditIcon}
-                     className="d-inline"
-                     style={{
-                        marginBottom: "2px",
-                        marginRight: "8px",
-                     }}
-                     width="20px"
-                     alt=""
-                  />
-                  Edit
-               </Link>
-            </div>
+               );
+            })}
          </AppTemplate>
       </div>
    );

@@ -1,6 +1,8 @@
 import React from "react";
 import AppTemplate from "../ui/AppTemplate";
 import { Link } from "react-router-dom";
+import memoryCards from "../../mock-data/memory-cards";
+const memoryCard = memoryCards[2];
 
 export default function ReviewImagery() {
    return (
@@ -8,9 +10,7 @@ export default function ReviewImagery() {
          <div className="card">
             <div className="card">
                <div className="card-body bg-primary lead">
-                  It is a paradisematic country, in which roasted parts of
-                  sentences fly into your mouth. Even the all-powerful Pointing
-                  has no control about the blind texts it
+                  {memoryCard.imagery}
                </div>
             </div>
             <div className="d-inline mt-5">

@@ -2,6 +2,9 @@ import React from "react";
 import SaveLogo from "../../icons/save.svg";
 import AppTemplate from "../ui/AppTemplate";
 import { Link } from "react-router-dom";
+import memoryCards from "../../mock-data/memory-cards";
+import toDisoplayDate from "date-fns/format";
+const memoryCard = memoryCards[2];
 
 export default function Edit() {
    return (
@@ -11,18 +14,18 @@ export default function Edit() {
             <div className="card">
                <div className="card-body bg-primary lead">
                   <textarea
-                     rows="8"
+                     rows="4"
                      id="edit-imagery-input"
-                     autoFocus={true}
+                     defaultValue={memoryCard.imagery}
                   ></textarea>
                </div>
             </div>
             <div className="card">
                <div className="card-body bg-secondary lead">
                   <textarea
-                     rows="8"
+                     rows="4"
                      id="edit-answer-input"
-                     autoFocus={true}
+                     defaultValue={memoryCard.answer}
                   ></textarea>
                </div>
             </div>
@@ -67,25 +70,25 @@ export default function Edit() {
                <p className="text-muted">Created on:</p>
             </div>
             <div className="col-9 mt-2">
-               <p>Dec.24, 2019</p>
+               <p>{toDisoplayDate(memoryCard.createdAt, "MMM. d, yyyy")}</p>
             </div>
             <div className="col-3 mt-2">
                <p className="text-muted">Last attempt:</p>
             </div>
             <div className="col-9 mt-2">
-               <p>Dec.31, 2019</p>
+               <p>{toDisoplayDate(memoryCard.lastAttemptAt, "MMM. d, yyyy")}</p>
             </div>
             <div className="col-3 mt-2">
                <p className="text-muted">Next attempt:</p>
             </div>
             <div className="col-9 mt-2">
-               <p>July. 14, 2020</p>
+               <p>{toDisoplayDate(memoryCard.nextAttemptAt, "MMM. d, yyyy")}</p>
             </div>
             <div className="col-3 mt-2">
                <p className="text-muted">Consecutives:</p>
             </div>
             <div className="col-9 mt-2">
-               <p>4</p>
+               <p>{memoryCard.totalSuccessfulAttempts}</p>
             </div>
          </div>
          <div className="row">
