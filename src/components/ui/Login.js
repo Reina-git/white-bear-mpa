@@ -2,8 +2,10 @@ import React from "react";
 import classnames from "classnames";
 import hash from "object-hash";
 import { v4 as getUuid } from "uuid";
+import { withRouter } from "react-router-dom";
+import { EMAIL_REGEX } from "../../utils/helpers";
 
-export default class Login extends React.Component {
+class Login extends React.Component {
    constructor(props) {
       super(props);
       this.state = {
@@ -22,14 +24,13 @@ export default class Login extends React.Component {
    }
    async setEmailState(emailInput) {
       const lowerCasedEmailInput = emailInput.toLowerCase();
-      // eslint-disable-next-line
-      const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
       if (emailInput === "") {
          this.setState({
             emailError: "Please enter your email address.",
             hasEmailError: true,
          });
-      } else if (emailRegex.test(lowerCasedEmailInput) === false) {
+      } else if (EMAIL_REGEX.test(lowerCasedEmailInput) === false) {
          this.setState({
             emailError: "Please enter a valid email address.",
             hasEmailError: true,
@@ -51,7 +52,7 @@ export default class Login extends React.Component {
       }
    }
 
-   async validateAndCreateUser() {
+   async validateAndLoginUser() {
       const emailInput = document.getElementById("email-input").value;
       const passwordInput = document.getElementById("password-input").value;
       await this.setEmailState(emailInput);
@@ -67,6 +68,7 @@ export default class Login extends React.Component {
             createdAt: Date.now(),
          };
          console.log(user);
+         this.props.history.push("/create-answer");
       }
    }
 
@@ -84,7 +86,6 @@ export default class Login extends React.Component {
                <div className="input-group mb-3 mt-2">
                   <input
                      type="text"
-                     className="form-control"
                      aria-label="Sizing example input"
                      className={classnames({
                         "form-control": true,
@@ -128,7 +129,7 @@ export default class Login extends React.Component {
                   className="btn btn-success btn-block mt-5"
                   id="letsGoButton"
                   onClick={() => {
-                     this.validateAndCreateUser();
+                     this.validateAndLoginUser();
                   }}
                >
                   Login
@@ -138,3 +139,4 @@ export default class Login extends React.Component {
       );
    }
 }
+export default withRouter(Login);

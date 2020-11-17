@@ -14,7 +14,15 @@ export default class Edit extends React.Component {
       this.state = {
          answerText: memoryCard.answer,
          imageryText: memoryCard.imagery,
+         isDisplayingDelete: false,
       };
+   }
+
+   showDelete() {
+      this.setState({
+         isDisplayingDelete: true,
+      });
+      console.log("Clicked");
    }
    checkHasInvalidCharCount() {
       if (
@@ -154,6 +162,9 @@ export default class Edit extends React.Component {
                         type="checkbox"
                         className="custom-control-input"
                         id="show-delete"
+                        onClick={() => {
+                           this.showDelete();
+                        }}
                      />
                      <label
                         className="custom-control-label"
@@ -164,12 +175,16 @@ export default class Edit extends React.Component {
                   </div>
 
                   <div className="mt-4 mb-3">
-                     <button
-                        className="btn btn-outline-danger d-none"
-                        id="delete-button"
-                     >
-                        Delete this card
-                     </button>
+                     {this.state.isDisplayingDelete && (
+                        <>
+                           <button
+                              className="btn btn-outline-danger"
+                              id="delete-button"
+                           >
+                              Delete this card
+                           </button>
+                        </>
+                     )}
                   </div>
                </div>
             </div>
