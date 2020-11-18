@@ -5,7 +5,12 @@ import { Link } from "react-router-dom";
 import memoryCards from "../../mock-data/memory-cards";
 import toDisplayDate from "date-fns/format";
 import classnames from "classnames";
-import { checkIsOver, MAX_CARD_CHARS } from "../../utils/helpers";
+import {
+   checkIsOver,
+   MAX_CARD_CHARS,
+   safelyParseJson,
+} from "../../utils/helpers";
+
 const memoryCard = memoryCards[2];
 
 export default class Edit extends React.Component {
@@ -19,10 +24,7 @@ export default class Edit extends React.Component {
    }
 
    showDelete() {
-      this.setState({
-         isDisplayingDelete: true,
-      });
-      console.log("Clicked");
+      this.setState({ isDisplayingDelete: !this.state.isDisplayingDelete });
    }
    checkHasInvalidCharCount() {
       if (
@@ -161,14 +163,17 @@ export default class Edit extends React.Component {
                      <input
                         type="checkbox"
                         className="custom-control-input"
-                        id="show-delete"
-                        onClick={() => {
+                        id="showDelete"
+                        name="showDelete"
+                        checked={this.state.isDisplayingDelete}
+                        value={!this.state.isDisplayingDelete}
+                        onChange={() => {
                            this.showDelete();
                         }}
                      />
                      <label
                         className="custom-control-label"
-                        htmlFor={"show-delete"}
+                        htmlFor={"showDelete"}
                      >
                         Show delete button
                      </label>
