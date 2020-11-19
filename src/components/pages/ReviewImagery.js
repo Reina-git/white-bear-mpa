@@ -1,21 +1,26 @@
 import React from "react";
 import AppTemplate from "../ui/AppTemplate";
 import { Link } from "react-router-dom";
-import memoryCards from "../../mock-data/memory-cards";
+// import memoryCards from "../../mock-data/memory-cards";
 import axios from "axios";
+import { connect } from "react-redux";
+import actions from "../../store/actions";
+import indexOfCurrentCard from "../../store/reducers/indexOfCurrentCard";
 
-const memoryCard = memoryCards[2];
-
-export default class ReviewImagery extends React.Component {
+class ReviewImagery extends React.Component {
    constructor(props) {
       super(props);
       axios
          .get(
             "https://raw.githubusercontent.com/Reina-git/white-bear-mpa/main/src/mock-data/memory-cards.json"
          )
-         .then(function (response) {
+         .then(function (res) {
             // handle success
-            console.log(response);
+            console.log(res);
+            props.dispatch({
+               type: actions.STORE_QUEUED_CARDS,
+               payload: res.data,
+            });
          })
          .catch(function (error) {
             // handle error
@@ -26,12 +31,13 @@ export default class ReviewImagery extends React.Component {
          });
    }
    render() {
+      const memoryCard = this.props.queuedCards[this.props.indexOfCurrentCard];
       return (
          <AppTemplate>
             <div className="card">
                <div className="card">
                   <div className="card-body bg-primary lead">
-                     {memoryCard.imagery}
+                     {memoryCard && memoryCard.imagery}
                   </div>
                </div>
                <div className="d-inline mt-5">
@@ -52,3 +58,10 @@ export default class ReviewImagery extends React.Component {
       );
    }
 }
+function mapStateToProps(state) {
+   return {
+      queuedCards: state.queuedCards,
+      indexOfCurrentCard: state.indexOfCurrentCard,
+   };
+}
+export default connect(mapStateToProps)(ReviewImagery);
