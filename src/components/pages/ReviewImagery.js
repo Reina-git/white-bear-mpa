@@ -1,11 +1,9 @@
 import React from "react";
 import AppTemplate from "../ui/AppTemplate";
 import { Link } from "react-router-dom";
-// import memoryCards from "../../mock-data/memory-cards";
 import axios from "axios";
 import { connect } from "react-redux";
 import actions from "../../store/actions";
-import indexOfCurrentCard from "../../store/reducers/indexOfCurrentCard";
 
 class ReviewImagery extends React.Component {
    constructor(props) {
@@ -25,13 +23,10 @@ class ReviewImagery extends React.Component {
          .catch(function (error) {
             // handle error
             console.log(error);
-         })
-         .then(function () {
-            // always executed
          });
    }
    render() {
-      const memoryCard = this.props.queuedCards[this.props.indexOfCurrentCard];
+      const memoryCard = this.props.queue.cards[this.props.queue.index];
       return (
          <AppTemplate>
             <div className="card">
@@ -60,8 +55,7 @@ class ReviewImagery extends React.Component {
 }
 function mapStateToProps(state) {
    return {
-      queuedCards: state.queuedCards,
-      indexOfCurrentCard: state.indexOfCurrentCard,
+      queue: state.queue,
    };
 }
 export default connect(mapStateToProps)(ReviewImagery);
