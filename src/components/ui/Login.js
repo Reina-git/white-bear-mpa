@@ -6,6 +6,8 @@ import { withRouter } from "react-router-dom";
 import { EMAIL_REGEX } from "../../utils/helpers";
 import orderBy from "lodash/orderBy";
 import axios from "axios";
+import actions from "../../store/actions";
+import { connect } from "react-redux";
 
 class Login extends React.Component {
    constructor(props) {
@@ -17,23 +19,6 @@ class Login extends React.Component {
          hasEmailError: false,
          hasPasswordError: false,
       };
-   }
-
-   componentDidMount() {
-      axios
-         .get(
-            "https://raw.githubusercontent.com/Reina-git/white-bear-mpa/main/src/mock-data/memory-cards.json"
-         )
-         .then((res) => {
-            // handle success
-
-            const currentUser = res.data;
-            console.log(currentUser);
-         })
-         .catch((error) => {
-            // handle error
-            console.log(error);
-         });
    }
 
    showInputs() {
@@ -86,7 +71,24 @@ class Login extends React.Component {
             password: hash(passwordInput),
             createdAt: Date.now(),
          };
-         console.log(user);
+         console.log("created user object", user);
+         axios
+            .get(
+               "https://raw.githubusercontent.com/Reina-git/white-bear-mpa/main/src/mock-data/user.json"
+            )
+            .then((res) => {
+               // handle success
+               const currentUser = res.data;
+               console.log(currentUser);
+               this.props.dispatch({
+                  type: actions.UPDATE_CURRENT_USER,
+                  payload: res.data,
+               });
+            })
+            .catch((error) => {
+               // handle error
+               console.log(error);
+            });
          this.props.history.push("/create-answer");
       }
    }
@@ -158,4 +160,8 @@ class Login extends React.Component {
       );
    }
 }
-export default withRouter(Login);
+
+function mapStateToProps(state) {
+   return {};
+}
+export default withRouter(connect(mapStateToProps)(Login));
